@@ -47,7 +47,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-browserify')
     grunt.loadNpmTasks('grunt-karma')
     grunt.loadNpmTasks('grunt-contrib-connect')
-    grunt.loadNpmTasks('grunt-open')
 
     grunt.registerTask('test', [
         'clean', 'browserify', 'karma', 'clean'

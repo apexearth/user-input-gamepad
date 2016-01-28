@@ -12,19 +12,19 @@
 </div>
 
 <script type="text/javascript">
-    var mouse = window.mouseevents(document) // Default target is `document.body`
-    mouse.on("mousemove", handleMouseEvent)
-    mouse.on("mousedown", handleMouseEvent)
-    mouse.on("mouseup", handleMouseEvent)
-    mouse.on("wheel", handleMouseEvent)
-    function handleMouseEvent(e) {
-        document.getElementById("output").innerHTML = "<pre style='margin: 0'>" + e + "\n" + JSON.stringify({
-                    button:  e.button,
-                    buttons: e.buttons,
-                    clientX: e.clientX,
-                    clientY: e.clientY,
-                    deltaY:  e.deltaY
-                }, null, 2) + "</pre>"
+    var gamepads = [];
+    window.gamepadinput.onConnect(function (gamepad) {
+        gamepads.push(gamepad)
+    });
+    window.gamepadinput.onDisconnect(function (gamepad) {
+        gamepads.splice(gamepads.indexOf(gamepad), 1)
+    });
+
+    window.requestAnimationFrame(update)
+    function update() {
+        if (gamepads.length > 0)
+            document.getElementById("output").innerHTML = "<pre>" + JSON.stringify(gamepads) + "<br>" + (window.gamepadinput(gamepads[0].index) === gamepads[0]) + "</pre>";
+        window.requestAnimationFrame(update)
     }
 </script>
 
