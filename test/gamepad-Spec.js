@@ -15,7 +15,6 @@ describe("gamepad.js", function () {
     })
 })
 
-
 function addGamepad() {
     var mockGamepad = {   // 360 Controller
         id:        gamepad.mocks.length,

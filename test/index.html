@@ -6,25 +6,29 @@
 </head>
 <body style="background-color: #222">
 
-<div id="output" style="position: fixed; left: 50%; top: 20%; margin-left: -150px;
+<pre id="output" style="position: absolute; left: 50%; top: 0; margin-left: -150px;
                             width: 300px; background-color: #444;
-                            color: #ccc; font-size: 18pt; padding: 20px;">
-</div>
+                            color: #ccc; font-size: 10pt; padding: 20px;">
+</pre>
 
 <script type="text/javascript">
-    var gamepads = [];
-    window.gamepadinput.onConnect(function (gamepad) {
-        gamepads.push(gamepad)
-    });
-    window.gamepadinput.onDisconnect(function (gamepad) {
-        gamepads.splice(gamepads.indexOf(gamepad), 1)
-    });
-
-    window.requestAnimationFrame(update)
+    window.requestAnimationFrame(update);
     function update() {
-        if (gamepads.length > 0)
-            document.getElementById("output").innerHTML = "<pre>" + JSON.stringify(gamepads) + "<br>" + (window.gamepadinput(gamepads[0].index) === gamepads[0]) + "</pre>";
-        window.requestAnimationFrame(update)
+        gamepad                                     = window.gamepadinput(0);
+        document.getElementById("output").innerText = JSON.stringify({
+            id:        gamepad.id,
+            index:     gamepad.index,
+            timestamp: gamepad.timestamp,
+            axes:      gamepad.axes,
+            buttons:   gamepad.buttons.map(function (button) {
+                return {
+                    pressed: button.pressed,
+                    value:   button.value
+                };
+            })
+
+        }, null, 2);
+        window.requestAnimationFrame(update);
     }
 </script>
 
