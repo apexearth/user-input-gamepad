@@ -5,7 +5,7 @@
 ![](http://img.shields.io/npm/dm/user-input-gamepad.svg?style=flat)
 ![](http://img.shields.io/npm/l/user-input-gamepad.svg?style=flat)
 
-Provides access to mouse events for developers using Node.js for browsers.
+Provides access to gamepads for developers using Node.js for browsers.
 
 ## Usage
 
@@ -15,7 +15,31 @@ Provides access to mouse events for developers using Node.js for browsers.
 
 ## Example
 
+### Node
 
+    var gamepadinput = require("user-input-gamepad")
+    var gamepad      = gamepadinput(0) // Retrieve gamepad at index 0.
+    
+### Browser
+
+    function update() {
+        gamepad                                     = window.gamepadinput(0);
+        document.getElementById("output").innerText = JSON.stringify({
+            id:        gamepad.id,
+            index:     gamepad.index,
+            timestamp: gamepad.timestamp,
+            axes:      gamepad.axes,
+            buttons:   gamepad.buttons.map(function (button) {
+                return {
+                    pressed: button.pressed,
+                    value:   button.value
+                };
+            })
+
+        }, null, 2);
+        window.requestAnimationFrame(update);
+    }
+    window.requestAnimationFrame(update);
 
 ## Tests
 

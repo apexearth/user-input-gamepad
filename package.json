@@ -1,7 +1,7 @@
 {
   "name": "user-input-gamepad",
   "version": "0.0.1",
-  "description": "Provides access to mouse events for developers using Node.js for browsers.",
+  "description": "Provides access to gamepads for developers using Node.js for browsers.",
   "main": "src/gamepad.js",
   "directories": {
     "test": "test"
@@ -21,8 +21,8 @@
     "url": "https://github.com/apexearth/user-input-gamepad/issues"
   },
   "keywords": [
-    "mouse",
-    "events",
+    "gamepad",
+    "controller",
     "browser"
   ],
   "homepage": "https://github.com/apexearth/user-input-gamepad#readme",
