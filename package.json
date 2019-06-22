@@ -1,6 +1,6 @@
 {
   "name": "user-input-gamepad",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Provides access to gamepads for developers using Node.js for browsers.",
   "main": "src/gamepad.js",
   "directories": {
