@@ -4,9 +4,10 @@ var gamepad = require("../src/gamepad.js")
 var browser = require("../src/browser.js")
 
 describe("gamepad.js", function () {
-    it('should return undefined when gamepad doesn\'t exist', function () {
-        expect(gamepad(0) === undefined
-            || gamepad(0) !== undefined && gamepad(0).id === undefined).toEqual(true)
+    it('should return undefined or null when gamepad doesn\'t exist', function () {
+        var gp = gamepad(0)
+        console.log(gp)
+        expect(!gp || gp.id === undefined).toEqual(true)
     })
     it('should return a gamepad when it exists', function () {
         addGamepad()
@@ -17,13 +18,13 @@ describe("gamepad.js", function () {
 
 function addGamepad() {
     var mockGamepad = {   // 360 Controller
-        id:        gamepad.mocks.length,
-        index:     gamepad.mocks.length,
+        id       : gamepad.mocks.length,
+        index    : gamepad.mocks.length,
         connected: true,
         timestamp: 1,
-        mapping:   'standard',
-        axes:      [0, 0, 0, 0],
-        buttons:   [
+        mapping  : 'standard',
+        axes     : [0, 0, 0, 0],
+        buttons  : [
             {pressed: false, value: 0},
             {pressed: false, value: 0},
             {pressed: false, value: 0},
@@ -44,6 +45,7 @@ function addGamepad() {
     }
     gamepad.mocks.push(mockGamepad)
 }
+
 function removeGamepad() {
     gamepad.mocks.pop()
 }
